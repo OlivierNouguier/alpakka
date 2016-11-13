@@ -11,6 +11,7 @@ The [Alpakka project](https://developer.lightbend.com/docs/alpakka/current/) is 
 * [AMQP](amqp.md)
 * [Apache Camel](external/apache-camel.md)
 * [Apache Cassandra](cassandra.md)
+* [Apache Druid](druid.md)
 * [Apache Geode](geode.md)
 * [Apache Kafka](kafka.md)
 * [Apache Kudu](kudu.md)

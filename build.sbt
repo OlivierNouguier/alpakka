@@ -6,6 +6,7 @@ lazy val modules: Seq[ProjectReference] = Seq(
   cassandra,
   couchbase,
   csv,
+  druid,
   dynamodb,
   elasticsearch,
   files,
@@ -90,6 +91,14 @@ lazy val couchbase =
   alpakkaProject("couchbase", "couchbase", Dependencies.Couchbase, parallelExecution in Test := false)
 
 lazy val csv = alpakkaProject("csv", "csv", Dependencies.Csv)
+
+lazy val druid = project
+  .enablePlugins(AutomateHeaderPlugin)
+  .settings(
+    name := "akka-stream-alpakka-druid",
+    crossScalaVersions := Seq("2.11.8"), //This does not seem to work.
+    Dependencies.Druid
+  )
 
 lazy val dynamodb = alpakkaProject("dynamodb", "aws.dynamodb", Dependencies.DynamoDB)
 
