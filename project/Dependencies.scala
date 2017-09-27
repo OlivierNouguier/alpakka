@@ -148,6 +148,27 @@ object Dependencies {
     )
   )
 
+  val rocksDB = {
+    val circeVersion = "0.8.0"
+    Seq(
+      libraryDependencies ++= Seq(
+        "org.rocksdb" % "rocksdbjni" % "5.7.3"
+      ) ++ Seq(
+        "io.circe" %% "circe-core",
+        "io.circe" %% "circe-generic",
+        "io.circe" %% "circe-parser"
+      ).map(_ % circeVersion % Test)
+    )
+  }
+
+  val caffeine = Seq(
+    libraryDependencies ++= Seq(
+      "com.github.blemale" %% "scaffeine" % "2.0.0" % "compile",   // ApacheV2
+      "com.google.code.findbugs" % "jsr305" % "3.0.1" % "provided" //Compilation warning without this ...
+    )
+
+  )
+
   val Jms = Seq(
     libraryDependencies ++= Seq(
       "javax.jms" % "jms" % "1.1" % Provided, // CDDL + GPLv2

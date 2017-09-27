@@ -13,6 +13,9 @@ lazy val modules: Seq[ProjectReference] = Seq(
   hbase,
   ironmq,
   jms,
+  join,
+  joinRocksDB,
+  joinCaffeine,
   kinesis,
   mongodb,
   mqtt,
@@ -100,6 +103,37 @@ lazy val hbase = alpakkaProject("hbase", Dependencies.HBase, fork in Test := tru
 lazy val ironmq = alpakkaProject("ironmq", Dependencies.IronMq)
 
 lazy val jms = alpakkaProject("jms", Dependencies.Jms, parallelExecution in Test := false)
+
+lazy val join = project
+  .in(file("join/core"))
+  .enablePlugins(AutomateHeaderPlugin)
+  .settings(
+    name := "akka-stream-alpakka-join",
+    fork in Test := true,
+    parallelExecution in Test := false
+  )
+
+lazy val joinRocksDB = project
+  .in(file("join/rocksdb"))
+  .enablePlugins(AutomateHeaderPlugin)
+  .settings(
+    name := "akka-stream-alpakka-join-rocksDB",
+    Dependencies.rocksDB,
+    fork in Test := true,
+    parallelExecution in Test := false
+  )
+  .dependsOn(join)
+
+lazy val joinCaffeine = project
+  .in(file("join/caffeine"))
+  .enablePlugins(AutomateHeaderPlugin)
+  .settings(
+    name := "akka-stream-alpakka-join-caffeine",
+    Dependencies.caffeine,
+    fork in Test := true,
+    parallelExecution in Test := false
+  )
+  .dependsOn(join)
 
 lazy val kinesis = alpakkaProject("kinesis",
                                   Dependencies.Kinesis,
